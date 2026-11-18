@@ -47,3 +47,5 @@ def consola(bot):
                 print('Peluquería:', bot.responder(mensaje)['respuesta'])
             except OSError as error:
                 print(f'Error al acceder al modelo local: {error}')
+            except ValueError:
+                print('No pude interpretar el mensaje. ¿Puedes reformularlo?')
