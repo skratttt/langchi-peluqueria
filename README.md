@@ -8,7 +8,7 @@ Usa Python 3.10 o posterior y [Ollama](https://ollama.com/download). Si Ollama n
 
 ```sh
 ollama pull qwen2.5:7b-instruct
-python v2.py
+python v3.py
 ```
 
 Escribe estos tres mensajes, uno por turno. La ficha y las salidas de la evaluación están incluidas en el repositorio.
@@ -21,6 +21,8 @@ Anótenme la solicitud de corte para el jueves a las 16:15.
 
 En la corrida de referencia se usó el GGUF Q4_K_M de Qwen2.5 7B Instruct que ya estaba instalado. Python envía los mensajes a la API local de Ollama para la demo habitual. [Modelo](https://ollama.com/library/qwen2.5:7b-instruct) · [API de chat](https://docs.ollama.com/api/chat)
 
+La demo usa V3. Esta revisión evita que una pregunta anterior arrastre su intención al siguiente turno. Conserva los datos de una solicitud para corregirla incluso después de una consulta sobre precios, horario o ubicación. La tabla y la presentación documentan la evaluación original de V0, V1 y V2. Para abrir la versión de esa evaluación, ejecuta `python v2.py`.
+
 ## Qué hace cada versión
 
 | Versión | Cómo detecta la intención | Cómo trata los datos |
@@ -28,6 +30,7 @@ En la corrida de referencia se usó el GGUF Q4_K_M de Qwen2.5 7B Instruct que ya
 | V0 cruda, `v0.py` | Busca literalmente cuatro cadenas predefinidas | Revisa el mensaje actual y devuelve datos solo si logra reunir los tres campos |
 | V1 por reglas, `v1.py` | Normaliza mayúsculas y tildes y busca patrones agrupados por intención | Hereda extracción y respuestas de V0 |
 | V2, `v2.py` | Qwen devuelve intención y campos del turno en JSON | Python valida los valores, conserva campos anteriores y aplica los cambios. Las respuestas salen de la ficha y del estado |
+| V3, `v3.py` | Qwen recibe el mensaje actual sin las consultas informativas anteriores | Conserva el estado de la solicitud y el mensaje de una hora pendiente de aclaración |
 
 El [prompt](evidencia/prompt_v0.txt), la [salida íntegra](evidencia/salida_v0.md) y el [bloque extraído](v0.py) pertenecen al primer intento de Qwen. El código trae un método HTTP con un endpoint incorrecto y carece de llamadas a ese método. Su historial se inicializa pero nunca se alimenta. La V0 se pudo ejecutar tal como salió porque solo usó reglas locales. El commit `60836c9` conserva esa versión.
 

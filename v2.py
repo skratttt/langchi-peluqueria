@@ -42,7 +42,7 @@ class Chatbot:
         self.solicitud_en_curso = False
         self.hora_ambigua = False
 
-    def interpretar(self, mensaje):
+    def preparar_mensajes(self, mensaje):
         contexto = {
             'solicitud_en_curso': self.solicitud_en_curso,
             'estado': self.estado,
@@ -50,11 +50,13 @@ class Chatbot:
             'mensajes_previos_del_cliente': self.historial[-5:],
             'mensaje_actual': mensaje,
         }
-        mensajes = [
+        return [
             {'role': 'system', 'content': INSTRUCCIONES},
             {'role': 'user', 'content': json.dumps(contexto, ensure_ascii=False)},
         ]
-        turno = json.loads(self.consultar(mensajes, json_mode=True))
+
+    def interpretar(self, mensaje):
+        turno = json.loads(self.consultar(self.preparar_mensajes(mensaje), json_mode=True))
         if not isinstance(turno, dict) or turno.get('intencion') not in INTENCIONES:
             raise ValueError('El modelo devolvió una intención inválida.')
         servicio = normalizar(turno.get('servicio'))
@@ -78,14 +80,17 @@ class Chatbot:
             respuesta = responder_horario(turno['dia'])
         elif intencion == 'ubicacion':
             respuesta = f"Estamos en {FICHA['direccion']}."
-        elif turno['hora'] or turno.get('hora_ambigua') is True:
-            respuesta = '¿Quieres consultar el horario de atención o pedir una hora para un servicio?'
         else:
-            servicios = ', '.join(FICHA['servicios'])
-            respuesta = (f'Por ahora tengo información sobre {servicios}, sus precios, el horario y la dirección. '
-                         'También puedo ayudarte a preparar una solicitud de hora.')
+            respuesta = self.responder_otra(turno)
         self.historial.append(mensaje)
         return {'intencion': intencion, 'datos': self.estado.copy(), 'respuesta': respuesta}
+
+    def responder_otra(self, turno):
+        if turno['hora'] or turno.get('hora_ambigua') is True:
+            return '¿Quieres consultar el horario de atención o pedir una hora para un servicio?'
+        servicios = ', '.join(FICHA['servicios'])
+        return (f'Por ahora tengo información sobre {servicios}, sus precios, el horario y la dirección. '
+                'También puedo ayudarte a preparar una solicitud de hora.')
 
     def responder_solicitud(self, turno):
         self.solicitud_en_curso = True
@@ -137,12 +142,16 @@ def responder_horario(dia):
     return f'Lunes a viernes de {semanal}, sábado de {sabado} y domingo cerrado.'
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description=__doc__)
+def iniciar(clase, descripcion):
+    parser = argparse.ArgumentParser(description=descripcion)
     parser.add_argument('--backend', choices=('ollama', 'libllama-windows'), default='ollama')
     args = parser.parse_args()
     consultar = consultar_ollama
     if args.backend == 'libllama-windows':
         from evidencia.local_windows import Offline
         consultar = Offline()
-    consola(Chatbot(consultar))
+    consola(clase(consultar))
+
+
+if __name__ == '__main__':
+    iniciar(Chatbot, __doc__)
