@@ -1,0 +1,5 @@
+/v0.py -text
+/evidencia/prompt_v0.txt -text
+/evidencia/salida_v0.md -text
+*.tsv text eol=lf
+*.jsonl text eol=lf

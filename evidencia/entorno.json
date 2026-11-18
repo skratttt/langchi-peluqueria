@@ -1,0 +1,17 @@
+{
+  "modelo": "qwen2.5:7b-instruct",
+  "pesos_sha256": "2bada8a7450677000f678be90653b85d364de7db25eb5ea54136ada5f3933730",
+  "backend": "libllama incluida en Ollama 0.40.16, inferencia local en proceso",
+  "sampling": "greedy (temperatura 0)",
+  "contexto": 8192,
+  "gpu_layers_solicitadas": 99,
+  "dispositivo_efectivo": "CPU; el backend CUDA no se registró en la generación original",
+  "max_tokens_generacion_v0": 3200,
+  "segundos_generacion_v0": 276.60,
+  "sonda": {
+    "prompt": "Responde solo con la palabra HOLA.",
+    "respuesta": "HOLA",
+    "segundos_con_carga": 14.64
+  },
+  "fecha_utc": "2026-11-18T20:46:49.106548+00:00"
+}
