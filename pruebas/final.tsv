@@ -1,0 +1,74 @@
+id	grupo	mensaje	intencion	servicio	dia	hora	criterio
+F01	informativa	¿Cuánto cobran por un corte de pelo?	precio				Informar $12.000 por el corte.
+F02	informativa	¿Qué precio tiene el color?	precio				Informar $30.000 por el color.
+F03	informativa	¿En cuánto queda arreglarme la barba?	precio				Informar $8.000 por la barba.
+F04	informativa	Pásame la lista de valores de sus servicios.	precio				Informar corte $12.000, barba $8.000 y color $30.000.
+F05	informativa	¿Barba y corte cuánto valen por separado?	precio				Informar barba $8.000 y corte $12.000.
+F06	informativa	¿Cuál es su horario de lunes a viernes?	horario				Informar 10:00 a 19:00.
+F07	informativa	¿Hasta qué hora están el sábado?	horario				Indicar cierre del sábado a las 16:00.
+F08	informativa	¿Abren el domingo o está cerrado?	horario				Indicar que el domingo está cerrado.
+F09	informativa	¿Desde qué hora funciona el local los martes?	horario				Indicar apertura del martes a las 10:00.
+F10	informativa	¿El jueves alcanzaría a pasar a las 18:30 según el horario?	horario				Indicar que 18:30 está dentro del horario del jueves, sin afirmar disponibilidad de atención.
+F11	informativa	¿Dónde queda la peluquería?	ubicacion				Indicar Avenida Los Telares 184, Ñuñoa, Santiago.
+F12	informativa	¿En qué comuna están?	ubicacion				Indicar Ñuñoa.
+F13	informativa	Necesito la dirección exacta para llegar en auto.	ubicacion				Indicar Avenida Los Telares 184, Ñuñoa, Santiago.
+F14	informativa	¿Me dan el nombre de la calle y el número del local?	ubicacion				Indicar Avenida Los Telares 184.
+F15	informativa	Quiero ubicar el local en el mapa. ¿Dónde lo busco?	ubicacion				Indicar Avenida Los Telares 184, Ñuñoa, Santiago.
+F16	completa	Quiero dejar una solicitud para un corte el lunes a las 12:00.	solicitud	corte	lunes	12:00	Resumir corte, lunes y 12:00 sin confirmar reserva.
+F17	completa	Para el martes a las 15:30 quiero pedir color.	solicitud	color	martes	15:30	Resumir color, martes y 15:30 sin confirmar reserva.
+F18	completa	¿Puedo solicitar barba para el miércoles a las 11:00?	solicitud	barba	miércoles	11:00	Resumir barba, miércoles y 11:00 sin asegurar disponibilidad.
+F19	completa	Necesito que me anoten para color el viernes a las 14:00.	solicitud	color	viernes	14:00	Resumir color, viernes y 14:00 sin confirmar reserva.
+F20	completa	¿Me toman una solicitud para corte el sábado a las diez de la mañana?	solicitud	corte	sábado	10:00	Resumir corte, sábado y 10:00 sin confirmar reserva.
+F21	completa	Me gustaría pedir hora para barba el jueves a las seis de la tarde.	solicitud	barba	jueves	18:00	Resumir barba, jueves y 18:00 sin confirmar reserva.
+F22	completa	Busco una cita para teñirme el miércoles a las 16:45.	solicitud	color	miércoles	16:45	Resumir color, miércoles y 16:45 sin confirmar reserva.
+F23	completa	Quiero pedir una hora para cortarme el pelo el martes al mediodía.	solicitud	corte	martes	12:00	Resumir corte, martes y 12:00 sin confirmar reserva.
+F24	incompleta	Necesito pedir una hora.	solicitud				Pedir los datos faltantes.
+F24	incompleta	Para un corte el jueves.	solicitud	corte	jueves		Pedir la hora.
+F24	incompleta	A las 13:30.	solicitud	corte	jueves	13:30	Resumir sin confirmar reserva.
+F25	incompleta	¿Puedo pedir una hora para color?	solicitud	color			Pedir día y hora.
+F25	incompleta	El viernes a las 16:00.	solicitud	color	viernes	16:00	Resumir sin confirmar reserva.
+F26	incompleta	Quisiera anotarme el lunes.	solicitud		lunes		Pedir servicio y hora.
+F26	incompleta	Para barba, a las 11:45.	solicitud	barba	lunes	11:45	Resumir sin confirmar reserva.
+F27	incompleta	Me interesa dejar pedida una hora para el sábado a las 13:00.	solicitud		sábado	13:00	Pedir el servicio.
+F27	incompleta	Corte de pelo, por favor.	solicitud	corte	sábado	13:00	Resumir sin confirmar reserva.
+F28	incompleta	Solicito hora para barba el miércoles.	solicitud	barba	miércoles		Pedir la hora.
+F28	incompleta	A las dos y media de la tarde.	solicitud	barba	miércoles	14:30	Resumir sin confirmar reserva.
+F29	incompleta	Quiero pedir hora a las 17:30.	solicitud			17:30	Pedir servicio y día.
+F29	incompleta	El lunes, para teñirme.	solicitud	color	lunes	17:30	Resumir sin confirmar reserva.
+F30	incompleta	¿Se puede pedir una hora para un corte?	solicitud	corte			Pedir día y hora.
+F30	incompleta	A las 18:15 me acomoda.	solicitud	corte		18:15	Pedir el día.
+F30	incompleta	Viernes.	solicitud	corte	viernes	18:15	Resumir sin confirmar reserva.
+F31	incompleta	Quiero pedir cita para color el jueves.	solicitud	color	jueves		Pedir la hora.
+F31	incompleta	Tipo 4.	solicitud	color	jueves		Aclarar si 04:00 o 16:00, sin asumir.
+F31	incompleta	De la tarde.	solicitud	color	jueves	16:00	Resolver la hora con el contexto y resumir sin confirmar reserva.
+F32	incompleta	Me quiero anotar para el martes.	solicitud		martes		Pedir servicio y hora.
+F32	incompleta	Necesito arreglarme la barba.	solicitud	barba	martes		Pedir la hora.
+F32	incompleta	A las 12:20.	solicitud	barba	martes	12:20	Resumir sin confirmar reserva.
+F33	incompleta	Pediría hora para corte el viernes.	solicitud	corte	viernes		Pedir la hora.
+F33	incompleta	A las tres de la tarde.	solicitud	corte	viernes	15:00	Resumir sin confirmar reserva.
+F34	correccion	Quiero pedir color el lunes a las 11:00.	solicitud	color	lunes	11:00	Resumir sin confirmar reserva.
+F34	correccion	Mejor el miércoles, a la misma hora.	solicitud	color	miércoles	11:00	Cambiar el día y mantener servicio y hora.
+F35	correccion	Anótenme la solicitud de corte para el jueves a las 16:15.	solicitud	corte	jueves	16:15	Resumir sin confirmar reserva.
+F35	correccion	¿Podría ser 17:45 en vez de eso?	solicitud	corte	jueves	17:45	Cambiar la hora y mantener servicio y día.
+F36	correccion	Solicito barba el viernes a las 12:00.	solicitud	barba	viernes	12:00	Resumir sin confirmar reserva.
+F36	correccion	Al final voy por color. El día y la hora quedan iguales.	solicitud	color	viernes	12:00	Cambiar el servicio y mantener día y hora.
+F37	correccion	Necesito una hora para corte el martes a las 11:00.	solicitud	corte	martes	11:00	Resumir sin confirmar reserva.
+F37	correccion	Perdón, sería el sábado a las 13:00.	solicitud	corte	sábado	13:00	Cambiar día y hora. Mantener corte.
+F38	correccion	Quiero solicitar hora para color el miércoles.	solicitud	color	miércoles		Pedir la hora.
+F38	correccion	Me confundí, es para barba.	solicitud	barba	miércoles		Actualizar servicio y seguir pidiendo la hora.
+F38	correccion	A las tres y cuarto de la tarde.	solicitud	barba	miércoles	15:15	Resumir sin confirmar reserva.
+F39	correccion	Quisiera pedir corte el jueves a las 17:00.	solicitud	corte	jueves	17:00	Resumir sin confirmar reserva.
+F39	correccion	Que sea viernes.	solicitud	corte	viernes	17:00	Cambiar el día y conservar servicio y hora.
+F39	correccion	Y a las 11:30 mejor.	solicitud	corte	viernes	11:30	Cambiar la hora y conservar servicio y día.
+F40	correccion	Pido una hora de color para el martes a las 10:30.	solicitud	color	martes	10:30	Resumir sin confirmar reserva.
+F40	correccion	En vez de color, sería corte el sábado. Mantén la hora.	solicitud	corte	sábado	10:30	Cambiar servicio y día. Mantener 10:30.
+F41	fuera	¿Hacen manicure permanente?	otra				Indicar que manicure no está entre los servicios.
+F42	fuera	¿Me reembolsan una atención de otra peluquería?	otra				Indicar que queda fuera del alcance. Evitar afirmar una política.
+F43	fuera	¿Me puedes dar el WhatsApp del peluquero?	otra				Indicar que no dispone de ese dato sin inventar un número.
+F44	fuera	¿Aceptan pago con tarjeta de crédito?	otra				Indicar que no dispone de información sobre formas de pago.
+F45	fuera	¿Hay estacionamiento privado para clientes?	otra				Indicar que no dispone de ese dato sin inventar una respuesta.
+F46	chilena_ambigua	¿A cuánto me sale una cortadita, compa?	precio				Informar $12.000 por el corte.
+F47	chilena_ambigua	¿En qué parte de Ñuñoa están, cabros?	ubicacion				Indicar Avenida Los Telares 184, Ñuñoa.
+F48	chilena_ambigua	¿Me dejan pedido un cortecito pa'l sábado tipo tres de la tarde?	solicitud	corte	sábado	15:00	Entender el chilenismo y resumir sin confirmar reserva.
+F49	chilena_ambigua	Quiero hora pa la barba el jueves a las 6.	solicitud	barba	jueves		Aclarar si 06:00 o 18:00, sin asumir.
+F50	chilena_ambigua	¿Se podrá para tipo 5?	otra				Preguntar si se refiere al horario o a solicitar una hora. Sin inventar un servicio o día.

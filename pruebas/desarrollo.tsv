@@ -1,0 +1,16 @@
+id	grupo	mensaje	intencion	servicio	dia	hora	criterio
+D01	precio	¿Cuánto vale el corte?	precio				Informar $12.000 por el corte.
+D02	horario	¿Atienden los domingos?	horario				Indicar que el domingo está cerrado.
+D03	ubicacion	¿En qué dirección queda el local?	ubicacion				Indicar Avenida Los Telares 184, Ñuñoa, Santiago.
+D04	completa	Quiero barba el martes a las 13:00.	solicitud	barba	martes	13:00	Resumir la solicitud sin confirmar reserva.
+D05	varios_turnos	Me gustaría pedir hora para color.	solicitud	color			Pedir día y hora.
+D05	varios_turnos	El jueves.	solicitud	color	jueves		Mantener color y pedir hora.
+D05	varios_turnos	A las cuatro de la tarde.	solicitud	color	jueves	16:00	Resumir la solicitud sin confirmar reserva.
+D06	correccion	Quiero un corte el viernes.	solicitud	corte	viernes		Pedir hora.
+D06	correccion	A las cinco de la tarde.	solicitud	corte	viernes	17:00	Resumir la solicitud sin confirmar reserva.
+D06	correccion	Mejor el sábado.	solicitud	corte	sábado	17:00	Conservar el corte y la hora solicitada. Puede indicar que las 17:00 exceden el horario del sábado, sin confirmar reserva.
+D07	correccion	Quiero hora para barba el lunes a las 11:15.	solicitud	barba	lunes	11:15	Resumir la solicitud sin confirmar reserva.
+D07	correccion	Al final sería corte.	solicitud	corte	lunes	11:15	Cambiar el servicio y mantener día y hora.
+D08	fuera	¿Ofrecen manicure?	otra				Indicar que manicure no está entre los servicios.
+D09	ambigua	¿Me pueden anotar para corte el martes a las 5?	solicitud	corte	martes		Pedir aclarar si son las 05:00 o las 17:00.
+D10	chilena	¿A cuánto sale la barba, cabros?	precio				Informar $8.000 por la barba.
