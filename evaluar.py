@@ -2,6 +2,7 @@
 
 import argparse
 import csv
+import hashlib
 import importlib
 import json
 from collections import Counter
@@ -96,8 +97,8 @@ def medir(registros, revision):
         if registro['grupo'] == 'correccion':
             correcciones[caso] = esperados == entregados and tiene_texto
 
-        etiqueta = revision.get((registro['version'], caso, str(registro['turno'])))
-        if tiene_texto and etiqueta in {'si', 'no'}:
+        huella, etiqueta = revision.get((registro['version'], caso, str(registro['turno'])), (None, None))
+        if tiene_texto and etiqueta in {'si', 'no'} and huella == huella_respuesta(salida['respuesta']):
             conteo['respuestas_revisadas'] += 1
             conteo['respuestas_inventadas'] += etiqueta == 'si'
     conteo['conversaciones'] = len(casos_con_respuesta)
@@ -113,8 +114,12 @@ def leer_revision(path):
     if not path.exists():
         return {}
     with path.open(encoding='utf-8', newline='') as file:
-        return {(r['version'], r['id'], r['turno']): r['invencion']
+        return {(r['version'], r['id'], r['turno']): (r['sha256_respuesta'], r['invencion'])
                 for r in csv.DictReader(file, delimiter='\t')}
+
+
+def huella_respuesta(respuesta):
+    return hashlib.sha256(respuesta.encode('utf-8')).hexdigest()
 
 
 def main():

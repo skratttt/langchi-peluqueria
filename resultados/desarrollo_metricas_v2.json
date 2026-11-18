@@ -1,0 +1,20 @@
+{
+  "v2": {
+    "turnos": 15,
+    "turnos_sin_respuesta": 0,
+    "errores_de_ejecucion": 0,
+    "intenciones_acertadas": 15,
+    "intenciones_indeterminadas": 0,
+    "pares_esperados": 25,
+    "pares_correctos": 25,
+    "pares_faltantes": 0,
+    "pares_incorrectos_o_adicionales": 0,
+    "turnos_con_estado_exacto": 15,
+    "conversaciones": 10,
+    "conversaciones_completadas": 10,
+    "conversaciones_de_correccion": 2,
+    "correcciones_estado_final_correcto": 2,
+    "respuestas_revisadas": 0,
+    "respuestas_inventadas": 0
+  }
+}
