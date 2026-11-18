@@ -1,0 +1,11 @@
+{
+  "nombre": "Peluquería Barrio Sur",
+  "direccion": "Avenida Los Telares 184, Ñuñoa, Santiago",
+  "servicios": {"corte": 12000, "barba": 8000, "color": 30000},
+  "horarios": {
+    "lunes": "10:00–19:00", "martes": "10:00–19:00", "miércoles": "10:00–19:00",
+    "jueves": "10:00–19:00", "viernes": "10:00–19:00", "sábado": "10:00–16:00",
+    "domingo": "cerrado"
+  },
+  "alcance": "Negocio ficticio. El asistente resume solicitudes de hora. No hay agenda, disponibilidad ni confirmación de reservas."
+}
