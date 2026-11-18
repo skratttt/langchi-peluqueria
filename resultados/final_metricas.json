@@ -52,5 +52,23 @@
     "conversaciones_completadas": 50,
     "conversaciones_de_correccion": 7,
     "correcciones_estado_final_correcto": 3
+  },
+  "v3": {
+    "turnos": 73,
+    "turnos_sin_respuesta": 0,
+    "errores_de_ejecucion": 0,
+    "intenciones_acertadas": 70,
+    "intenciones_indeterminadas": 0,
+    "pares_esperados": 126,
+    "pares_correctos": 119,
+    "pares_faltantes": 7,
+    "pares_incorrectos_o_adicionales": 4,
+    "turnos_con_estado_exacto": 64,
+    "respuestas_revisadas": 73,
+    "respuestas_inventadas": 1,
+    "conversaciones": 50,
+    "conversaciones_completadas": 50,
+    "conversaciones_de_correccion": 7,
+    "correcciones_estado_final_correcto": 4
   }
 }

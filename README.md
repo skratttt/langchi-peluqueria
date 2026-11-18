@@ -21,7 +21,7 @@ Anótenme la solicitud de corte para el jueves a las 16:15.
 
 En la corrida de referencia se usó el GGUF Q4_K_M de Qwen2.5 7B Instruct que ya estaba instalado. Python envía los mensajes a la API local de Ollama para la demo habitual. [Modelo](https://ollama.com/library/qwen2.5:7b-instruct) · [API de chat](https://docs.ollama.com/api/chat)
 
-La demo usa V3. Esta revisión evita que una pregunta anterior arrastre su intención al siguiente turno. Conserva los datos de una solicitud para corregirla incluso después de una consulta sobre precios, horario o ubicación. La tabla y la presentación documentan la evaluación original de V0, V1 y V2. Para abrir la versión de esa evaluación, ejecuta `python v2.py`.
+La demo usa V3. Qwen recibe la pregunta actual y los datos pertinentes de la solicitud en curso. Eso permite cambiar de tema y retomar una solicitud sin reenviar las consultas informativas anteriores. La tabla y la presentación incluyen la evaluación de las cuatro versiones.
 
 ## Qué hace cada versión
 
@@ -40,7 +40,16 @@ En V0 y V1, `responder` dirige el mensaje a un método por intención. Los méto
 
 En V2, `interpretar` envía el turno, el estado de la solicitud y los últimos mensajes del cliente al modelo local. Recibe un JSON de campos y filtra valores que no correspondan a los servicios, los días o el formato de hora. `responder_solicitud` integra los cambios. En la demo, el segundo mensaje actualiza `hora` y conserva `servicio` y `dia`. Si la hora se expresa como «a las 5» sin indicar mañana o tarde, la regla de ambigüedad pide precisión.
 
-La consola imprime solo el texto para el cliente. El evaluador recoge además la intención y el estado. La V2 mantiene una solicitud por sesión y usa días de la semana. `ficha.json` contiene los valores que usa para redactar precios, horarios y dirección.
+En V3, `preparar_mensajes` conserva el mensaje actual, los campos de la solicitud y, cuando corresponde, la frase que contiene una hora pendiente de aclaración. `responder_otra` ofrece una reformulación ante entradas ininteligibles o consultas fuera del alcance.
+
+| Componente | Función |
+| --- | --- |
+| `comun.py` | `consultar_ollama` llama a la API local con temperatura cero. `normalizar` unifica tildes y mayúsculas para buscar palabras o comparar valores. `consola` recibe los turnos e imprime la respuesta. |
+| `ficha.json` | Define los servicios, precios, horarios y dirección del local ficticio. Python consulta esta ficha para redactar las respuestas de V2 y V3. |
+| `evaluar.py` | `leer_casos` agrupa los turnos por conversación. `ejecutar` crea una instancia por conversación y guarda las salidas. `medir` compara intención y datos con lo esperado y usa la revisión de afirmaciones ligada a la huella de cada respuesta. |
+| `evidencia/local_windows.py` | Permite reproducir la evaluación en la instalación Windows registrada, ejecutando los mismos pesos en el proceso de Python con `libllama`. La demo habitual usa Ollama. |
+
+V2 y V3 mantienen una solicitud por sesión, usan días de la semana y resumen lo pedido. La disponibilidad queda a cargo del local.
 
 ## Repetir la evaluación
 
@@ -50,7 +59,7 @@ python evaluar.py --lote final
 python evaluar.py --lote final --recalcular
 ```
 
-Los conjuntos de desarrollo y evaluación suman 10 y 50 conversaciones, respectivamente. `evaluar.py` crea una instancia del chatbot por conversación, alimenta solo los mensajes del cliente y almacena cada respuesta, los campos extraídos, el tiempo y las llamadas al modelo. Conserva el criterio esperado en los archivos de resultados. Estos criterios nunca entran al modelo. Las tres versiones reciben los mismos turnos y la misma ficha del negocio.
+Los conjuntos de desarrollo y evaluación contienen 10 y 50 conversaciones, respectivamente. `evaluar.py` crea una instancia del chatbot por conversación, alimenta los mensajes del cliente y almacena cada respuesta, los campos extraídos, el tiempo y las llamadas al modelo. Conserva el criterio esperado en los archivos de resultados. Los criterios se usan para calificar las salidas. Las cuatro versiones reciben los mismos turnos y trabajan con los mismos datos del negocio.
 
 La corrida incluida se ejecutó en Windows con `libllama` de Ollama 0.40.16 y una RTX 3070. Esa ruta usa los pesos locales, greedy (temperatura 0), contexto de 8.192 tokens y un máximo de 256 tokens de salida por consulta. El adaptador incluye una gramática JSON y está fijado al binario usado. Para repetir esa ruta con la misma instalación, agrega `--backend libllama-windows` al comando de evaluación o de demo. La configuración habitual usa HTTP local y puede generar variaciones según la versión de Ollama o el hardware.
 
@@ -58,21 +67,23 @@ El archivo `resultados/final_revision.tsv` contiene la revisión de afirmaciones
 
 ## Resultados
 
-| Medida | V0 cruda | V1 por reglas | V2 local |
-| --- | ---: | ---: | ---: |
-| Conversaciones con respuesta en todos los turnos | 50/50 | 50/50 | 50/50 |
-| Intenciones correctas | 12/73 (16,4 %) | 41/73 (56,2 %) | 69/73 (94,5 %) |
-| Pares campo–valor recuperados | 0/126 (0 %) | 0/126 (0 %) | 121/126 (96,0 %) |
-| Pares incorrectos o adicionales | 0 | 0 | 1 |
-| Correcciones con estado final correcto | 0/7 (0 %) | 0/7 (0 %) | 3/7 (42,9 %) |
-| Respuestas con afirmaciones sin respaldo | 0/73 (0 %) | 0/73 (0 %) | 1/73 (1,4 %) |
+| Medida | V0 cruda | V1 por reglas | V2 local | V3 local |
+| --- | ---: | ---: | ---: | ---: |
+| Conversaciones con respuesta en todos los turnos | 50/50 | 50/50 | 50/50 | 50/50 |
+| Intenciones correctas | 12/73 (16,4 %) | 41/73 (56,2 %) | 69/73 (94,5 %) | 70/73 (95,9 %) |
+| Pares campo-valor recuperados | 0/126 (0 %) | 0/126 (0 %) | 121/126 (96,0 %) | 119/126 (94,4 %) |
+| Pares incorrectos o adicionales | 0 | 0 | 1 | 4 |
+| Correcciones con estado final correcto | 0/7 (0 %) | 0/7 (0 %) | 3/7 (42,9 %) | 4/7 (57,1 %) |
+| Respuestas con afirmaciones sin respaldo | 0/73 (0 %) | 0/73 (0 %) | 1/73 (1,4 %) | 1/73 (1,4 %) |
 
 V0 y V1 emitieron respuestas genéricas en 67 y 38 turnos, respectivamente. Estas respuestas cuentan como atendidas para comprobar que el bot siguió ejecutándose. La métrica de intenciones y la recuperación de datos capturan qué entendió cada versión.
 
-V2 perdió una hora que el cliente quería mantener en F34, F36 y F40. En F38 interpretó «las tres y cuarto de la tarde» como 15:45. Ese resumen cuenta como una afirmación sin respaldo. La ejecución tardó una mediana de 3,04 segundos por turno de V2 en el equipo de referencia, con el modelo ya cargado.
+V3 acertó una intención y una corrección final más que V2 y recuperó dos pares esperados menos. En F29 pidió aclarar una hora que el cliente ya había dado como 17:30. En F38, ambas versiones interpretaron «las tres y cuarto de la tarde» como 15:45. Cada resumen con esa hora cuenta como una afirmación sin respaldo. En desarrollo, V3 devolvió una etiqueta fuera del conjunto de intenciones en D05. El evaluador conservó el error y la consola pide reformular ante ese tipo de salida.
 
-La V1 aísla el cambio del clasificador frente a V0. La comparación con V2 mide en conjunto el paso a extracción por modelo, memoria explícita y respuesta construida desde la ficha. La revisión contenida en el paquete la realizó Codex al contrastar las salidas con la ficha y el diálogo.
+V1 funciona como alternativa simplificada por reglas frente a V2 y V3. El contraste V0–V1 aísla el cambio del clasificador. El salto a V2 mide conjuntamente el uso del modelo para interpretar, la memoria explícita y la construcción de respuestas desde la ficha. La revisión de afirmaciones incluida la realizó Codex al contrastar las salidas con la ficha y el diálogo.
 
 ## Entrega y defensa
 
 El repositorio reúne código, ficha, entrada y salida de la V0, casos anotados y evaluación. La [presentación](presentacion/Defensa_LangChi.pptx) incluye notas para una defensa de 15 minutos. El historial se conserva en `LangChi_Peluqueria.bundle` dentro del paquete. Para recuperarlo en otro computador, ejecuta `git clone LangChi_Peluqueria.bundle LangChi_Peluqueria_Git` desde la carpeta que contiene el bundle.
+
+El enunciado fija la entrega en GitHub para el martes 24 de noviembre de 2026 a las 23:59. Tras recuperar el repositorio, sitúate en `LangChi_Peluqueria_Git`. Con una sesión válida de GitHub CLI puedes crear un repositorio privado y subir su historial con `gh repo create langchi-peluqueria --private --source . --remote github --push`. Selecciona las cuentas del profesor y la ayudante para habilitar su acceso. La presentación se coordina con el profesor para la semana del 23 de noviembre. El curso pide equipos de tres o cuatro personas, con autorización del profesor para tamaños distintos. [GitHub CLI](https://cli.github.com/manual/gh_repo_create)

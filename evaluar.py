@@ -13,7 +13,7 @@ from comun import CAMPOS, INTENCIONES, MODELO, consultar_ollama, normalizar
 
 
 BASE = Path(__file__).resolve().parent
-VERSIONES = ('v0', 'v1', 'v2')
+VERSIONES = ('v0', 'v1', 'v2', 'v3')
 
 
 def leer_casos(lote):

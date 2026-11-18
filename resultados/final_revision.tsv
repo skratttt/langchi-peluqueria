@@ -218,3 +218,76 @@ v2	F47	1	00c05848c8fceb0484eddb95fd4540197258d8ce472d8ba5611cf3a07dc682af	no	La 
 v2	F48	1	74539d94a637dc8a97f6f7d133e7b294fdb5fa80ce559f7af3f112b798bdacc9	no	Resume los datos expresados en el diálogo y deja la disponibilidad por confirmar.
 v2	F49	1	9593dbe8cfb9798cb01ba6c44ee52bccb18d6adac8b64c8fe337cc2ff28ff120	no	Pide detalles o aclaración. No confirma disponibilidad ni afirma un hecho sin respaldo.
 v2	F50	1	daa04ba39b1db4a5122fda5b240ec01ec2f7fddbc3c35bbc9f8309598500ce9b	no	Pide detalles o aclaración. No confirma disponibilidad ni afirma un hecho sin respaldo.
+v3	F01	1	43e407123b880d9213619afab97a7869eb7dc48c286f2c48b4edede751b40fc8	no	La afirmación coincide con la ficha del negocio.
+v3	F02	1	5f4591e5eeb9b7b8fcb34bf48e3970f74b6f2bc8e2800e8874c753bb851fa19e	no	La afirmación coincide con la ficha del negocio.
+v3	F03	1	82ac2c830303cfd8e764211c7bdf21cddd4cd525de35f2e4e3f24feeb3adb8da	no	La afirmación coincide con la ficha del negocio.
+v3	F04	1	9b00dae0f891abf4d66c47492873b4df74e3466699af2fe07433a686ae8fd72c	no	La afirmación coincide con la ficha del negocio.
+v3	F05	1	298c88bfabbbe0a449f9d65ab6729e7ee49b865ac5d7f295c3b5c69815d618a4	no	La afirmación coincide con la ficha del negocio.
+v3	F06	1	3a6b54e69e89c7ac9f92dbb43642ecd06adf1306dfb7fcce67d9e21a6e02f2fd	no	La afirmación coincide con la ficha del negocio.
+v3	F07	1	fc7d4c23e613e8884983d3bb3426f7b0a6f108b6e864bb88a5e5306abf1bc6e9	no	La afirmación coincide con la ficha del negocio.
+v3	F08	1	d78b5d6da8fa0d90fe9aab9b50bae3cf358b6415529aefe1c46fcaf1953d6adf	no	La afirmación coincide con la ficha del negocio.
+v3	F09	1	9f7ed808862b975de5a763395c2d9655a1b79741968e10507b2b2d5688d061c0	no	La afirmación coincide con la ficha del negocio.
+v3	F10	1	08db78fa61ea188ad544f77942b8697466d3551c79acd53eb5268911cd11300f	no	Pide el servicio en una pregunta de horario. El día y la hora figuran en el mensaje.
+v3	F11	1	00c05848c8fceb0484eddb95fd4540197258d8ce472d8ba5611cf3a07dc682af	no	La afirmación coincide con la ficha del negocio.
+v3	F12	1	00c05848c8fceb0484eddb95fd4540197258d8ce472d8ba5611cf3a07dc682af	no	La afirmación coincide con la ficha del negocio.
+v3	F13	1	00c05848c8fceb0484eddb95fd4540197258d8ce472d8ba5611cf3a07dc682af	no	La afirmación coincide con la ficha del negocio.
+v3	F14	1	00c05848c8fceb0484eddb95fd4540197258d8ce472d8ba5611cf3a07dc682af	no	La afirmación coincide con la ficha del negocio.
+v3	F15	1	00c05848c8fceb0484eddb95fd4540197258d8ce472d8ba5611cf3a07dc682af	no	La afirmación coincide con la ficha del negocio.
+v3	F16	1	591d99912b4864b11095e6099b426019afdf19f1067204520548b4f54f1b02f7	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F17	1	ba5002454d80ab8ec499cf80dacdba11f2031cc81b0165e7b91c45cab4b101da	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F18	1	df6d3d877e1a74087e83f0de685a6fc30c5964c161ef7dd5e456acb144de33f9	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F19	1	f21e272827574004d26d803a1ddd6cf5752ed468b904c9321777c4aaf0e31e76	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F20	1	7fa692cd9e27013f217178427a00b85370947418ed71911276ffd9fec519d37b	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F21	1	c631b7ab631713d7fde924bf5d01d91f16c4ccf0e6806c985396bb3eb818cb1c	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F22	1	cba6153889a215bc6f01f67e90564a88e3d7b93acae2d76988b47f824aa09543	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F23	1	0a3c92488672d29fdbb0484edee2871d970868145f2a4159ffe44295d0e90370	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F24	1	fc1bf20ddf7d518d49c419b6a0ec68a053960b83baf6157c05880f1554204c99	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F24	2	b1d3aa57f927fb22dce1d21c93d8eaa2185129da44fc0cdc6d625cee18de0895	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F24	3	59327afa4d7eb05b4283f458c0557121249d6ee3052c0ab1bd5f5e9405139635	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F25	1	b2b3357d9641adb633f5871ae9a0cc44115103f2b8b7a6cc04ff26ee72d8019a	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F25	2	37c013c2649aec6e89bb4d1a162aefe5b263bf30a0aba38f2f47f77db0ab04d0	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F26	1	e426c77413b9ed0224c12dddb1d3d4f0e0212f29ecf0c9d3c925c9b8e5172eda	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F26	2	4e91722a68c9f32c276ad5bee009d63ba8206b24ba1cce4a782e26f39ee06866	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F27	1	08db78fa61ea188ad544f77942b8697466d3551c79acd53eb5268911cd11300f	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F27	2	92d357014c3cd281f0681f5211455e896360bc9f67c0b4a1d8308ac86d9bf406	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F28	1	b1d3aa57f927fb22dce1d21c93d8eaa2185129da44fc0cdc6d625cee18de0895	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F28	2	2d3f0648f4899abd43ca025eef4827fb30751696852f497dcf8ca44b641edd00	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F29	1	59ac77bf6d0eb30c0b43f5046f5c93ed3cd9e763d69af61fe14db6003e5db71d	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F29	2	9593dbe8cfb9798cb01ba6c44ee52bccb18d6adac8b64c8fe337cc2ff28ff120	no	Pide precisar el período de una hora ya explícita, 17:30. No afirma una hora nueva.
+v3	F30	1	b2b3357d9641adb633f5871ae9a0cc44115103f2b8b7a6cc04ff26ee72d8019a	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F30	2	5521e741efd51bbb7b07d5e47cd9021d7dfb2344d28e10a7d26fbd6ac8b8c2fd	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F30	3	05f2f21d7d07eaf942b201427312a34ce9f79c707b9b211a67a49d0add771f08	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F31	1	b1d3aa57f927fb22dce1d21c93d8eaa2185129da44fc0cdc6d625cee18de0895	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F31	2	daa04ba39b1db4a5122fda5b240ec01ec2f7fddbc3c35bbc9f8309598500ce9b	no	Pide escoger entre horario y solicitud. La conversación ya trataba de una solicitud.
+v3	F31	3	9593dbe8cfb9798cb01ba6c44ee52bccb18d6adac8b64c8fe337cc2ff28ff120	no	Vuelve a pedir aclaración después de que el cliente indica la tarde.
+v3	F32	1	e426c77413b9ed0224c12dddb1d3d4f0e0212f29ecf0c9d3c925c9b8e5172eda	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F32	2	b1d3aa57f927fb22dce1d21c93d8eaa2185129da44fc0cdc6d625cee18de0895	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F32	3	cf8af454a56cfaff48535b8fbef63d8cd856645a8eba2dfef61d3a69ef70e213	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F33	1	b1d3aa57f927fb22dce1d21c93d8eaa2185129da44fc0cdc6d625cee18de0895	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F33	2	0b7bedc71e3cfb2fd55b811fb9168ecdf999ab218aef97c2825cd76a7fa58fb1	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F34	1	d9ef8ab36aa701de3e6eb8a078bd37f4f9d3ff6a4ef7f57d82ee7bee078661b0	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F34	2	9593dbe8cfb9798cb01ba6c44ee52bccb18d6adac8b64c8fe337cc2ff28ff120	no	Pide aclarar una hora que el cliente pidió mantener. No afirma una hora nueva.
+v3	F35	1	ebee954ac5fa46138e661873769e232595f93261945eee0719507b4773b13cbe	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F35	2	251b3fb918d00daf1b8fa536ad05af732d020ec762f2b617f3548a3093aaabef	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F36	1	de2779ead2c3943850edfb7bc8faf2b03d9d8184b78dfc0fb457d2776ef3b188	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F36	2	2498d71ab5aea606d5330c46a49a9b2991b49f480d41b1c43f4dfd4914f369e3	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F37	1	1e2c64917d5052cb103095da0b00cdb9cfe6c40a80b177bcec19c65704cecf75	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F37	2	92d357014c3cd281f0681f5211455e896360bc9f67c0b4a1d8308ac86d9bf406	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F38	1	b1d3aa57f927fb22dce1d21c93d8eaa2185129da44fc0cdc6d625cee18de0895	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F38	2	b1d3aa57f927fb22dce1d21c93d8eaa2185129da44fc0cdc6d625cee18de0895	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F38	3	e08cecf8bbb9bafbcc17f2b08b2db93955dcbe01fb0cea7e2177073bac6e25be	si	Atribuye 15:45 al cliente, que dijo las tres y cuarto de la tarde, 15:15.
+v3	F39	1	789a4ef8fdd8651fc704c3bdab9a8f9c0150da1217bb071113aeca9032cf020c	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F39	2	9593dbe8cfb9798cb01ba6c44ee52bccb18d6adac8b64c8fe337cc2ff28ff120	no	Pide aclarar la hora aunque el cliente solo cambió el día. No afirma una hora nueva.
+v3	F39	3	fb405e71783ad274ea3e22abed69760740b2921865d7fdbcd4ee471b28c216a1	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F40	1	ce1b154a1dd58317a4f2e2a119a0968ffc1e1512dd73439d77f861e5ea5800f4	no	Resume los datos del diálogo y deja la disponibilidad por confirmar.
+v3	F40	2	9593dbe8cfb9798cb01ba6c44ee52bccb18d6adac8b64c8fe337cc2ff28ff120	no	Pide aclarar la hora, que el cliente indicó conservar. No afirma una hora nueva.
+v3	F41	1	81e907185aaebb4cb10d403f8ab3eaaf58a0f47594f190dfdec6a6a077c3bb26	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F42	1	81e907185aaebb4cb10d403f8ab3eaaf58a0f47594f190dfdec6a6a077c3bb26	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F43	1	81e907185aaebb4cb10d403f8ab3eaaf58a0f47594f190dfdec6a6a077c3bb26	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F44	1	81e907185aaebb4cb10d403f8ab3eaaf58a0f47594f190dfdec6a6a077c3bb26	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F45	1	81e907185aaebb4cb10d403f8ab3eaaf58a0f47594f190dfdec6a6a077c3bb26	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F46	1	43e407123b880d9213619afab97a7869eb7dc48c286f2c48b4edede751b40fc8	no	La afirmación coincide con la ficha del negocio.
+v3	F47	1	00c05848c8fceb0484eddb95fd4540197258d8ce472d8ba5611cf3a07dc682af	no	La afirmación coincide con la ficha del negocio.
+v3	F48	1	9593dbe8cfb9798cb01ba6c44ee52bccb18d6adac8b64c8fe337cc2ff28ff120	no	Pide aclarar el período pese a que el cliente especificó de la tarde.
+v3	F49	1	9593dbe8cfb9798cb01ba6c44ee52bccb18d6adac8b64c8fe337cc2ff28ff120	no	Pide detalles o aclaración y se ciñe al alcance de la ficha.
+v3	F50	1	9593dbe8cfb9798cb01ba6c44ee52bccb18d6adac8b64c8fe337cc2ff28ff120	no	Pide aclaración sobre una hora sin contexto. No confirma una reserva ni afirma un dato.
