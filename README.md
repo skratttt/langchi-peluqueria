@@ -45,6 +45,23 @@ El commit [`60836c9`](https://github.com/skratttt/langchi-peluqueria/commit/6083
 
 La respuesta original decía que el bot mantendría en cuenta el historial. El código crea la lista, pero nunca agrega los turnos. También declara un método HTTP con una ruta incorrecta y nunca lo llama. La V0 funcionó con coincidencias literales. En F01, «¿Cuánto cobran por un corte de pelo?» era una consulta de precio que V0 clasificó como «otra» porque buscaba la palabra «precio». En la evaluación final acertó 12 de 73 intenciones y recuperó 0 de 126 pares campo-valor.
 
+### Fallos, cambios y verificación
+
+| Versión | Qué falló y por qué | Cambio y evidencia |
+| --- | --- | --- |
+| **V0** | En F01 clasificó como `otra` una consulta de precio que usaba «cuánto cobran». El clasificador buscaba la palabra literal «precio». | **V1** amplió las expresiones y normalizó tildes y mayúsculas. Con la misma entrada, F01 pasó de `otra` a `precio`. Ver [salida V0](resultados/final_v0.jsonl) y [salida V1](resultados/final_v1.jsonl). |
+| **V1** | En F24 detectó la petición inicial y clasificó como `otra` los turnos que aportaban corte, jueves y 13:30. Las reglas clasificaban cada mensaje por separado y la extracción heredada de V0 carecía de estado. | **V2** usó Qwen para extraer intención y campos en JSON, y Python para combinar los datos por turno. En los mismos tres turnos de F24, [V1](resultados/final_v1.jsonl) terminó sin datos y [V2](resultados/final_v2.jsonl) terminó con corte, jueves, 13:30. |
+| **V2** | En una prueba en vivo, tras una consulta de ubicación volvió a dar la dirección cuando recibió `asdasdaw`. El mensaje de ubicación seguía en el historial enviado al modelo. | **V3** limitó el contexto al turno actual y a la solicitud en curso. Se hicieron [dos pruebas con el modelo simulado](pruebas/prueba_v3.py). Comprueban la reformulación de entradas ininteligibles y que preguntar por la dirección entre una solicitud y una corrección conserve los datos. |
+| **V3** | En F29, la respuesta del modelo marcó `hora_ambigua: true` cuando el usuario solo aportó día y servicio, y Python borró 17:30. En F38, Qwen interpretó «tres y cuarto de la tarde» como 15:45, un valor que pasó la validación de formato. Ambos casos están en la [salida V3](resultados/final_v3.jsonl). | **Propuesta futura.** Conservar una hora explícita si el turno no la modifica y validar expresiones horarias antes de actualizarla. Volver a probar F29 con 17:30 y F38 con 15:15, y luego repetir los 50 casos. |
+
+Para ejecutar las dos pruebas de regresión de V3 desde la raíz del repositorio:
+
+```sh
+python -m unittest discover -s pruebas -p 'prueba_v3.py' -v
+```
+
+Estas pruebas comprueban el contexto enviado y el estado resultante con respuestas controladas. La evaluación final con Qwen local complementa esa comprobación y se puede consultar en las salidas registradas.
+
 ### Del mensaje a la respuesta
 
 En V0 y V1, `responder` dirige el mensaje a un método por intención. Los métodos informativos devuelven texto fijo. El método de solicitud busca servicio y día por coincidencia literal y prueba un formato de hora. V1 solo reemplaza `detectar_intencion`, de modo que cualquier cambio en esa métrica se explica por las reglas del clasificador.
@@ -95,6 +112,6 @@ V1 funciona como alternativa simplificada por reglas frente a V2 y V3. El contra
 
 ## Entrega y defensa
 
-La [presentación](presentacion/Defensa_LangChi.pptx) incluye nueve láminas con notas para una defensa de 15 minutos. Las láminas 3 a 5 muestran el prompt, la salida y el diagnóstico de V0. Los anexos A y B contienen el prompt completo y la respuesta del modelo, incluido el código crudo. Para preparar la demostración, revisa el caso F35 de la lámina 8. El historial también se conserva en `LangChi_Peluqueria.bundle` dentro del paquete descargable del proyecto.
+La [presentación](presentacion/Defensa_LangChi.pptx) incluye diez láminas con notas para una defensa de 15 minutos. Las láminas 3 a 5 muestran el prompt, la salida y el diagnóstico de V0. Las láminas 6 y 7 exponen los cambios, las causas y las pruebas de V1 a V3. La lámina 9 muestra F35 para la demo y la lámina 10 identifica los fallos pendientes de V3. Los anexos A y B contienen el prompt completo y la respuesta del modelo, incluido el código crudo. El historial de la entrega original también se conserva en `LangChi_Peluqueria.bundle` dentro del paquete descargable del proyecto.
 
 El enunciado fija la entrega en GitHub para el martes 24 de noviembre de 2026 a las 23:59. Tras recuperar el repositorio, sitúate en `LangChi_Peluqueria_Git`. Con una sesión válida de GitHub CLI puedes crear un repositorio privado y subir su historial con `gh repo create langchi-peluqueria --private --source . --remote github --push`. Selecciona las cuentas del profesor y la ayudante para habilitar su acceso. La presentación se coordina con el profesor para la semana del 23 de noviembre. El curso pide equipos de tres o cuatro personas, con autorización del profesor para tamaños distintos. [GitHub CLI](https://cli.github.com/manual/gh_repo_create)
