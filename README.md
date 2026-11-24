@@ -62,6 +62,22 @@ python -m unittest discover -s pruebas -p 'prueba_v3.py' -v
 
 Estas pruebas comprueban el contexto enviado y el estado resultante con respuestas controladas. La evaluación final con Qwen local complementa esa comprobación y se puede consultar en las salidas registradas.
 
+#### Ejemplo reproducible: F24, una solicitud en tres turnos
+
+Los cuatro bots reciben las mismas entradas. Para cada turno, la prueba registra la intención y el estado. Un estado vacío quiere decir que el bot todavía no tiene servicio, día ni hora.
+
+| Mensaje | Resultado esperado | V1 observada | V2 observada |
+| --- | --- | --- | --- |
+| «Necesito pedir una hora.» | Detectar `solicitud` y pedir los datos. | Detecta `solicitud`. Estado vacío. | Detecta `solicitud` y pide servicio, día y hora. |
+| «Para un corte el jueves.» | Guardar `corte` y `jueves`. Pedir la hora. | Clasifica `otra`. Estado vacío. | Guarda `corte` y `jueves`. Pide la hora. |
+| «A las 13:30.» | Guardar `13:30` y conservar los dos datos previos. | Clasifica `otra`. Estado vacío. | Resume `corte`, `jueves`, `13:30`. |
+
+Para seguir la comparación, busca `F24` en [las entradas y sus criterios](pruebas/final.tsv), en [las salidas de V1](resultados/final_v1.jsonl) y en [las de V2](resultados/final_v2.jsonl). En el segundo turno, V2 recupera dos pares campo-valor. En el tercero recupera tres. F24 mide acumulación de datos. F35 mide otro comportamiento: cambiar una hora y conservar el servicio y día.
+
+#### Cómo interpretar los números de la defensa
+
+Los denominadores cuentan cosas distintas. **73** son los turnos respondidos por cada versión dentro de las **50 conversaciones**. **126** son los pares campo-valor esperados que se pueden recuperar al sumar los estados de todos esos turnos. **7** son los casos de corrección en los que se compara el estado completo del último turno. En F38, `15:15` cuenta como faltante y `15:45` como errónea, aunque ambas horas tienen un formato válido. Además, la hora incorrecta se registra como afirmación sin respaldo porque aparece en el texto entregado al cliente.
+
 ### Del mensaje a la respuesta
 
 En V0 y V1, `responder` dirige el mensaje a un método por intención. Los métodos informativos devuelven texto fijo. El método de solicitud busca servicio y día por coincidencia literal y prueba un formato de hora. V1 solo reemplaza `detectar_intencion`, de modo que cualquier cambio en esa métrica se explica por las reglas del clasificador.
