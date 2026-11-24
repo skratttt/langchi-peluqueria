@@ -2,6 +2,12 @@
 
 Asistente de consola en Python para una peluquería ficticia de Ñuñoa. Responde consultas de precio, horario y ubicación. Reúne servicio, día y hora para resumir una solicitud. La disponibilidad queda por confirmar por el local.
 
+## Integrantes
+
+- Maximiliano Augusto Espinoza Sáez
+- Nicolás Eduardo Germain Kacic
+- Eduardo Jose Rojas Hernandez
+
 ## Iniciar la demo
 
 Usa Python 3.10 o posterior y [Ollama](https://ollama.com/download). Si Ollama no está abierto, inicia `ollama serve` en otra terminal. Desde la raíz del proyecto, ejecuta:
@@ -42,6 +48,8 @@ El commit [`60836c9`](https://github.com/skratttt/langchi-peluqueria/commit/6083
 | [Respuesta íntegra de Qwen](evidencia/salida_v0.md) | La introducción, el bloque de código y las instrucciones de ejecución que devolvió el modelo. |
 | [Código crudo](v0.py) | El bloque Python de esa respuesta, extraído sin editar. Es el punto de partida de la comparación. |
 | [Pruebas de V0](resultados/final_v0.jsonl) | Las respuestas observadas, con el resultado esperado y los datos recuperados de cada turno. |
+
+El bloque Python de la respuesta archivada coincide byte por byte con los 3.584 bytes de `v0.py`. El historial conserva esa misma versión desde `60836c9`. El registro independiente de la sesión de generación no figura en el repositorio, por lo que quedan sin verificar el número de intentos y lo ocurrido antes del primer commit.
 
 La respuesta original decía que el bot mantendría en cuenta el historial. El código crea la lista, pero nunca agrega los turnos. También declara un método HTTP con una ruta incorrecta y nunca lo llama. La V0 funcionó con coincidencias literales. En F01, «¿Cuánto cobran por un corte de pelo?» era una consulta de precio que V0 clasificó como «otra» porque buscaba la palabra «precio». En la evaluación final acertó 12 de 73 intenciones y recuperó 0 de 126 pares campo-valor.
 
