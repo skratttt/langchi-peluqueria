@@ -32,7 +32,18 @@ La demo usa V3. Qwen recibe la pregunta actual y los datos pertinentes de la sol
 | V2, `v2.py` | Qwen devuelve intención y campos del turno en JSON | Python valida los valores, conserva campos anteriores y aplica los cambios. Las respuestas salen de la ficha y del estado |
 | V3, `v3.py` | Qwen recibe el mensaje actual sin las consultas informativas anteriores | Conserva el estado de la solicitud y el mensaje de una hora pendiente de aclaración |
 
-El [prompt](evidencia/prompt_v0.txt), la [salida íntegra](evidencia/salida_v0.md) y el [bloque extraído](v0.py) pertenecen al primer intento de Qwen. El código trae un método HTTP con un endpoint incorrecto y carece de llamadas a ese método. Su historial se inicializa pero nunca se alimenta. La V0 se pudo ejecutar tal como salió porque solo usó reglas locales. El commit `60836c9` conserva esa versión.
+### Evidencia de la primera versión
+
+El commit [`60836c9`](https://github.com/skratttt/langchi-peluqueria/commit/60836c98b91056e356a094a725752ec7df8356dd) conserva el primer intento de Qwen2.5 7B Instruct. El modelo se ejecutó localmente para generar el código.
+
+| Evidencia | Qué contiene |
+| --- | --- |
+| [Prompt exacto](evidencia/prompt_v0.txt) | El encargo enviado al modelo, con la ficha, las cinco intenciones, la interfaz de Python y la petición de usar el modelo y conservar datos entre turnos. |
+| [Respuesta íntegra de Qwen](evidencia/salida_v0.md) | La introducción, el bloque de código y las instrucciones de ejecución que devolvió el modelo. |
+| [Código crudo](v0.py) | El bloque Python de esa respuesta, extraído sin editar. Es el punto de partida de la comparación. |
+| [Pruebas de V0](resultados/final_v0.jsonl) | Las respuestas observadas, con el resultado esperado y los datos recuperados de cada turno. |
+
+La respuesta original decía que el bot mantendría en cuenta el historial. El código crea la lista, pero nunca agrega los turnos. También declara un método HTTP con una ruta incorrecta y nunca lo llama. La V0 funcionó con coincidencias literales. En F01, «¿Cuánto cobran por un corte de pelo?» era una consulta de precio que V0 clasificó como «otra» porque buscaba la palabra «precio». En la evaluación final acertó 12 de 73 intenciones y recuperó 0 de 126 pares campo-valor.
 
 ### Del mensaje a la respuesta
 
@@ -84,6 +95,6 @@ V1 funciona como alternativa simplificada por reglas frente a V2 y V3. El contra
 
 ## Entrega y defensa
 
-El repositorio reúne código, ficha, entrada y salida de la V0, casos anotados y evaluación. La [presentación](presentacion/Defensa_LangChi.pptx) incluye notas para una defensa de 15 minutos. El historial se conserva en `LangChi_Peluqueria.bundle` dentro del paquete. Para recuperarlo en otro computador, ejecuta `git clone LangChi_Peluqueria.bundle LangChi_Peluqueria_Git` desde la carpeta que contiene el bundle.
+La [presentación](presentacion/Defensa_LangChi.pptx) incluye nueve láminas con notas para una defensa de 15 minutos. Las láminas 3 a 5 muestran el prompt, la salida y el diagnóstico de V0. Los anexos A y B contienen el prompt completo y la respuesta del modelo, incluido el código crudo. Para preparar la demostración, revisa el caso F35 de la lámina 8. El historial también se conserva en `LangChi_Peluqueria.bundle` dentro del paquete descargable del proyecto.
 
 El enunciado fija la entrega en GitHub para el martes 24 de noviembre de 2026 a las 23:59. Tras recuperar el repositorio, sitúate en `LangChi_Peluqueria_Git`. Con una sesión válida de GitHub CLI puedes crear un repositorio privado y subir su historial con `gh repo create langchi-peluqueria --private --source . --remote github --push`. Selecciona las cuentas del profesor y la ayudante para habilitar su acceso. La presentación se coordina con el profesor para la semana del 23 de noviembre. El curso pide equipos de tres o cuatro personas, con autorización del profesor para tamaños distintos. [GitHub CLI](https://cli.github.com/manual/gh_repo_create)
