@@ -2,22 +2,24 @@
 
 Asistente de consola en Python para una peluquería ficticia de Ñuñoa. Responde consultas de precio, horario y ubicación. Reúne servicio, día y hora para resumir una solicitud. La disponibilidad queda por confirmar por el local.
 
+[Presentación del proyecto](presentacion/Defensa_LangChi.pptx)
+
 ## Integrantes
 
 - Maximiliano Augusto Espinoza Sáez
 - Nicolás Eduardo Germain Kacic
 - Eduardo Jose Rojas Hernandez
 
-## Iniciar la demo
+## Ejecución del asistente
 
-Usa Python 3.10 o posterior y [Ollama](https://ollama.com/download). Si Ollama no está abierto, inicia `ollama serve` en otra terminal. Desde la raíz del proyecto, ejecuta:
+El asistente requiere Python 3.10 o posterior y [Ollama](https://ollama.com/download). Si el servicio no está activo, se inicia con `ollama serve` en otra terminal. La demo se ejecuta desde la raíz del repositorio.
 
 ```sh
 ollama pull qwen2.5:7b-instruct
 python v3.py
 ```
 
-Escribe estos tres mensajes, uno por turno. La ficha y las salidas de la evaluación están incluidas en el repositorio.
+La siguiente interacción permite verificar una corrección de hora.
 
 ```text
 Anótenme la solicitud de corte para el jueves a las 16:15.
@@ -80,11 +82,7 @@ Los cuatro bots reciben las mismas entradas. Para cada turno, la prueba registra
 | «Para un corte el jueves.» | Guardar `corte` y `jueves`. Pedir la hora. | Clasifica `otra`. Estado vacío. | Guarda `corte` y `jueves`. Pide la hora. |
 | «A las 13:30.» | Guardar `13:30` y conservar los dos datos previos. | Clasifica `otra`. Estado vacío. | Resume `corte`, `jueves`, `13:30`. |
 
-Para seguir la comparación, busca `F24` en [las entradas y sus criterios](pruebas/final.tsv), en [las salidas de V1](resultados/final_v1.jsonl) y en [las de V2](resultados/final_v2.jsonl). En el segundo turno, V2 recupera dos pares campo-valor. En el tercero recupera tres. F24 mide acumulación de datos. F35 mide otro comportamiento: cambiar una hora y conservar el servicio y día.
-
-#### Cómo interpretar los números de la defensa
-
-Los denominadores cuentan cosas distintas. **73** son los turnos respondidos por cada versión dentro de las **50 conversaciones**. **126** son los pares campo-valor esperados que se pueden recuperar al sumar los estados de todos esos turnos. **7** son los casos de corrección en los que se compara el estado completo del último turno. En F38, `15:15` cuenta como faltante y `15:45` como errónea, aunque ambas horas tienen un formato válido. Además, la hora incorrecta se registra como afirmación sin respaldo porque aparece en el texto entregado al cliente.
+El caso `F24` está documentado en [las entradas y sus criterios](pruebas/final.tsv), en [las salidas de V1](resultados/final_v1.jsonl) y en [las de V2](resultados/final_v2.jsonl). En el segundo turno, V2 recupera dos pares campo-valor. En el tercero recupera tres. F24 mide acumulación de datos. F35 mide otro comportamiento: cambiar una hora y conservar el servicio y día.
 
 ### Del mensaje a la respuesta
 
@@ -113,7 +111,7 @@ python evaluar.py --lote final --recalcular
 
 Los conjuntos de desarrollo y evaluación contienen 10 y 50 conversaciones, respectivamente. `evaluar.py` crea una instancia del chatbot por conversación, alimenta los mensajes del cliente y almacena cada respuesta, los campos extraídos, el tiempo y las llamadas al modelo. Conserva el criterio esperado en los archivos de resultados. Los criterios se usan para calificar las salidas. Las cuatro versiones reciben los mismos turnos y trabajan con los mismos datos del negocio.
 
-La corrida incluida se ejecutó en Windows con `libllama` de Ollama 0.40.16 y una RTX 3070. Esa ruta usa los pesos locales, greedy (temperatura 0), contexto de 8.192 tokens y un máximo de 256 tokens de salida por consulta. El adaptador incluye una gramática JSON y está fijado al binario usado. Para repetir esa ruta con la misma instalación, agrega `--backend libllama-windows` al comando de evaluación o de demo. La configuración habitual usa HTTP local y puede generar variaciones según la versión de Ollama o el hardware.
+La corrida incluida se ejecutó en Windows con `libllama` de Ollama 0.40.16 y una RTX 3070. Esa ruta usa los pesos locales, greedy (temperatura 0), contexto de 8.192 tokens y un máximo de 256 tokens de salida por consulta. El adaptador incluye una gramática JSON y está fijado al binario usado. El parámetro `--backend libllama-windows` selecciona esa ruta en la evaluación o en la demo. La configuración habitual usa HTTP local y puede generar variaciones según la versión de Ollama o el hardware.
 
 El archivo `resultados/final_revision.tsv` contiene la revisión de afirmaciones por turno de la corrida incluida. Si una nueva corrida genera una respuesta distinta, el evaluador la deja pendiente de revisión. Los datos se comparan como pares campo–valor, ignorando tildes y mayúsculas. Un valor incorrecto cuenta como un valor esperado faltante y como un par incorrecto o adicional.
 
@@ -133,9 +131,3 @@ V0 y V1 emitieron respuestas genéricas en 67 y 38 turnos, respectivamente. Esta
 V3 acertó una intención y una corrección final más que V2 y recuperó dos pares esperados menos. En F29 pidió aclarar una hora que el cliente ya había dado como 17:30. En F38, ambas versiones interpretaron «las tres y cuarto de la tarde» como 15:45. Cada resumen con esa hora cuenta como una afirmación sin respaldo. En desarrollo, V3 devolvió una etiqueta fuera del conjunto de intenciones en D05. El evaluador conservó el error y la consola pide reformular ante ese tipo de salida.
 
 V1 funciona como alternativa simplificada por reglas frente a V2 y V3. El contraste V0–V1 aísla el cambio del clasificador. El salto a V2 mide conjuntamente el uso del modelo para interpretar, la memoria explícita y la construcción de respuestas desde la ficha. La revisión de afirmaciones incluida la realizó Codex al contrastar las salidas con la ficha y el diálogo.
-
-## Entrega y defensa
-
-La [presentación](presentacion/Defensa_LangChi.pptx) incluye diez láminas con notas para una defensa de 15 minutos. Las láminas 3 a 5 muestran el prompt, la salida y el diagnóstico de V0. Las láminas 6 y 7 exponen los cambios, las causas y las pruebas de V1 a V3. La lámina 9 muestra F35 para la demo y la lámina 10 identifica los fallos pendientes de V3. Los anexos A y B contienen el prompt completo y la respuesta del modelo, incluido el código crudo. El historial de la entrega original también se conserva en `LangChi_Peluqueria.bundle` dentro del paquete descargable del proyecto.
-
-El enunciado fija la entrega en GitHub para el martes 24 de noviembre de 2026 a las 23:59. Tras recuperar el repositorio, sitúate en `LangChi_Peluqueria_Git`. Con una sesión válida de GitHub CLI puedes crear un repositorio privado y subir su historial con `gh repo create langchi-peluqueria --private --source . --remote github --push`. Selecciona las cuentas del profesor y la ayudante para habilitar su acceso. La presentación se coordina con el profesor para la semana del 23 de noviembre. El curso pide equipos de tres o cuatro personas, con autorización del profesor para tamaños distintos. [GitHub CLI](https://cli.github.com/manual/gh_repo_create)
